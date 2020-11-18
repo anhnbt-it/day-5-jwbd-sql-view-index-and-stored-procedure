@@ -101,8 +101,11 @@ SELECT * FROM `student` WHERE `gender` = 1 AND `age` >= 20;
 SELECT `rn` AS 'So hieu sinh vien', `sid` AS 'Mã môn học', MAX(`mark`) 
 	FROM `studentsubject`;
 -- 17. Hiển thị chi tiết bảng StudentSubject của 2 môn học có điểm thi cao nhất.
-SELECT `mark`
-	FROM `studentsubject` ORDER BY `mark` DESC LIMIT 0,2;
+SELECT `mark`, `subject`.`sname`
+	FROM `studentsubject`
+		RIGHT JOIN `subject`
+			ON `studentsubject`.`sid` = `subject`.`sid` 
+				ORDER BY `mark` DESC LIMIT 0,2;
 -- 18. Hiển thị ngày thi có điểm thi cao nhất.
 SELECT `date`, MAX(`mark`) FROM `studentsubject`;
 SELECT `date`, `mark` FROM `studentsubject` ORDER BY `mark` DESC LIMIT 0,1;
