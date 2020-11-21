@@ -31,3 +31,21 @@ DELIMITER ;
 -- Gọi PROCEDURE
 CALL getCustomerCountByCity('Las Vegas', @total);
 SELECT @total;
+
+-- Tham số loại INOUT
+-- Tạo một PROCEDURE setCounter()
+DELIMITER //
+CREATE PROCEDURE setCounter(
+	INOUT counter INT,
+    IN inc INT
+)
+BEGIN 
+	SET counter = counter + inc;
+END //
+DELIMITER ;
+-- Gọi store procedure
+SET @counter = 1;
+CALL SetCounter(@counter,1); -- 2
+CALL SetCounter(@counter,1); -- 3
+CALL SetCounter(@counter,5); -- 8
+SELECT @counter; -- 8
